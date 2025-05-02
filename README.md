@@ -11,8 +11,8 @@ This tool reads a single Prolog file (`Scheduling System.pl`) containing both th
 ## Repository Structure
 
 ```
-├── Scheduling System.pl    # Combined Prolog knowledge base and implementation
-├── public_tests.pl         # Official PlUnit test suite for testing
+├── Scheduling System.pl    # Combined Prolog KB and implementation
+├── public_tests.pl         # Official PlUnit test suite for grading
 └── README.md               # This document
 ```
 
@@ -45,10 +45,19 @@ Your `Scheduling System.pl` implements the following core predicates:
 5. **`assembly_hours(+Schedules, -AH)`**
    Computes a list `AH` of `slot(Day, SlotNumber)` where **all** students are simultaneously free (and not on a day off).
 
+6. Please note that sometimes the output could be too big to be fully displayed, resulting in ellipses (`...`) in the REPL.
+
+   To show the complete result, add this command in the Prolog REPL:
+
+   ```prolog
+   ?- set_prolog_flag(answer_write_options,[max_depth(0)]).
+   ```
+
 To load your program in SWI‑Prolog:
 
 ```prolog
-?- ['Scheduling System'].  
+?- ['Scheduling System'].
+?- [public_tests].
 ```
 
 Then invoke any predicate, for example:
@@ -57,6 +66,38 @@ Then invoke any predicate, for example:
 ?- university_schedule(S).
 ?- student_schedule(student_0, Slots).
 ?- assembly_hours(S, AH).
+```
+
+## Examples
+
+Below are sample interactions demonstrating key functionality (actual output may vary based on your KB data):
+
+1. **Generate Full University Schedule**
+
+```prolog
+?- university_schedule(S).
+S = [sched(student_17,[slot(saturday,1,csen601),slot(saturday,3,csen602),slot(thursday,2,csen603),slot(monday,2,csen604),slot(sunday,1,dmet604)]),sched(student_18,[slot(sunday,1,csen403),slot(thursday,2,csen603),slot(monday,2,csen604),slot(tuesday,3,dmet604),slot(saturday,1,math401)]),sched(student_19,[slot(sunday,1,csen403),slot(saturday,1,csen602),slot(thursday,2,csen603),slot(monday,2,csen604),slot(thursday,4,csen907)]),sched(student_27,[slot(tuesday,2,csen1002),slot(sunday,1,csen1003),slot(thursday,4,csen907),slot(sunday,2,dmet1001),slot(wednesday,2,huma1001),slot(tuesday,3,netw1009)]),sched(student_28,[slot(tuesday,2,csen1002),slot(sunday,1,csen1003),slot(saturday,1,csen602),slot(thursday,2,csen603),slot(thursday,4,csen907),slot(tuesday,3,netw1009)]),sched(student_29,[slot(tuesday,2,csen1002),slot(monday,2,csen401),slot(sunday,1,csen403),slot(thursday,4,csen907),slot(sunday,2,dmet1001),slot(wednesday,2,huma1001)]),sched(student_7,[slot(monday,2,csen401),slot(sunday,1,csen403),slot(tuesday,4,csis402),slot(monday,5,de404),slot(wednesday,3,elct401),slot(saturday,1,math401),slot(saturday,3,rpw401)]),sched(student_8,[slot(monday,2,csen401),slot(saturday,1,csen602),slot(sunday,1,csis402),slot(monday,5,de404),slot(tuesday,4,elct401),slot(sunday,2,math401),slot(saturday,3,rpw401)]),sched(student_9,[slot(monday,2,csen401),slot(saturday,1,csen601),slot(monday,5,de404),slot(sunday,2,dmet1001),slot(tuesday,4,elct401),slot(wednesday,1,math401),slot(saturday,3,rpw401)])]; 
+```
+
+2. **Retrieve a Student's Schedule**
+
+```prolog
+?- student_schedule(student_1, Slots).
+Slots = [ slot(tuesday,3,phy201), slot(friday,4,eng150) ].
+```
+
+3. **Check for Clashes**
+
+```prolog
+?- no_clashes([slot(monday,1,cs101), slot(monday,1,math102)]).
+false.
+```
+
+4. **Compute Common Free Slots (Assembly Hours)**
+
+```prolog
+?- university_schedule(All), assembly_hours(All, AH).
+AH = [ slot(thursday,2), slot(wednesday,5) ].
 ```
 
 ## Testing
@@ -96,4 +137,3 @@ You should see output like:
 2. Create a feature branch: `git checkout -b feature/your-feature`
 3. Commit your changes.
 4. Open a Pull Request with a clear description of your updates.
-
