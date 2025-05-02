@@ -97,6 +97,3 @@ You should see output like:
 3. Commit your changes.
 4. Open a Pull Request with a clear description of your updates.
 
----
-
-Feel free to adjust formatting, add badges (e.g., build status), or extend sections as needed.
