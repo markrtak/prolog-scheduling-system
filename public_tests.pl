@@ -1,4 +1,4 @@
-:- consult(Scheduling System).
+:- consult('Scheduling System.pl').
 :- begin_tests(public1).
 :- use_module(library(lists)).
 
