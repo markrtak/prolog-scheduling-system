@@ -11,8 +11,8 @@ This tool reads a single Prolog file (`Scheduling System.pl`) containing both th
 ## Repository Structure
 
 ```
-├── Scheduling System.pl    # Combined Prolog KB and implementation
-├── public_tests.pl         # Official PlUnit test suite for grading
+├── Scheduling System.pl    # Combined Prolog knowledge base and implementation
+├── public_tests.pl         # Official PlUnit test suite for testing
 └── README.md               # This document
 ```
 
