@@ -120,8 +120,8 @@ To run the public tests:
 3. Or within the SWI‑Prolog REPL:
 
    ```prolog
-   ?- ['Scheduling System'], [public_tests].
-   ?- run_tests, halt.
+   ?- [public_tests].
+   ?- run_tests.
    ```
 
 You should see output like:
